@@ -2,5 +2,4 @@
 hermes-python>=0.1
 
 # More dependency goes here.. 
-paho.mqtt.client as mqtt
-requests
+paho-mqtt>=1.4.0
