@@ -31,7 +31,6 @@ class fanTurnOn(object):
         # start listening to MQTT
         self.start_blocking()
     def publishcommand():
-    
        #ip_address=findmqttaddr()
         client = mqtt.Client()
         client.connect(MQTT_IP_ADDR,1883)     #Ip address and port
