@@ -45,10 +45,7 @@ class fanTurnOn(object):
         # action code goes here...
         print '[Received] intent: {}'.format(intent_message.intent.intent_name)
         #publishcommand()
-        client = mqtt.Client()
-        client.connect(MQTT_IP_ADDR,1883)     #Ip address and port
-        client.publish("inTopic","0")     #gatewayUID
-
+        
         # if need to speak the execution result by tts
         hermes.publish_start_session_notification(intent_message.site_id, "Fan Turned On", "")
 
@@ -61,6 +58,10 @@ class fanTurnOn(object):
             print("Testing")
             self.fanTurnOn_callback(hermes, intent_message)
         elif coming_intent == 'lordtyrion96:fanTurnOn':
+            client = mqtt.Client()
+            client.connect(MQTT_IP_ADDR,1883)     #Ip address and port
+            client.publish("inTopic","0")     #gatewayUID
+
             print("Testing 2")
             self.fanTurnOn_callback(hermes, intent_message)
 
