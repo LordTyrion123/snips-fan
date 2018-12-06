@@ -30,6 +30,12 @@ class fanTurnOn(object):
 
         # start listening to MQTT
         self.start_blocking()
+    def publishcommand():
+    
+       #ip_address=findmqttaddr()
+        client = mqtt.Client()
+        client.connect(MQTT_IP_ADDR,1883)     #Ip address and port
+        client.publish("inTopic","0")     #gatewayUID
         
     # --> Sub callback function, one per intent
     def fanTurnOn_callback(self, hermes, intent_message):
@@ -49,15 +55,14 @@ class fanTurnOn(object):
     def master_intent_callback(self,hermes, intent_message):
         coming_intent = intent_message.intent.intent_name
         if coming_intent == 'fanTurnOn':
+            print("Testing")
+            self.fanTurnOn_callback(hermes, intent_message)
+        elif coming_intent == 'lordtyrion96:fanTurnOn':
+            print("Testing 2")
             self.fanTurnOn_callback(hermes, intent_message)
 
         # more callback and if condition goes here...
-    def publishcommand():
-    
-       #ip_address=findmqttaddr()
-        client = mqtt.Client()
-        client.connect(MQTT_IP_ADDR,1883)     #Ip address and port
-        client.publish("home/living","L1O")     #gatewayUID
+
 
 
     # --> Register callback function and start MQTT
