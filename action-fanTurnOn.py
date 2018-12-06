@@ -30,7 +30,7 @@ class fanTurnOn(object):
 
         # start listening to MQTT
         self.start_blocking()
-    def publishcommand():
+    def publishcommand(self):
        #ip_address=findmqttaddr()
         client = mqtt.Client()
         client.connect(MQTT_IP_ADDR,1883)     #Ip address and port
@@ -43,7 +43,7 @@ class fanTurnOn(object):
         
         # action code goes here...
         print '[Received] intent: {}'.format(intent_message.intent.intent_name)
-        publishcommand()
+        self.publishcommand()
         
         # if need to speak the execution result by tts
         hermes.publish_start_session_notification(intent_message.site_id, "Fan Turned On", "")
