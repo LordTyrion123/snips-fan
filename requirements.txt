@@ -3,3 +3,4 @@ hermes-python>=0.1
 
 # More dependency goes here.. 
 paho-mqtt>=1.4.0
+spidev>=3.3
