@@ -52,7 +52,8 @@ class fanTurnOn(object):
         
         # action code goes here...
         print '[Received] intent: {}'.format(intent_message.intent.intent_name)
-        self.publishcommand()
+        powerstatus = intent_message.slots.power.first().value
+        self.publishcommand(powerstatus)
         
         # if need to speak the execution result by tts
         hermes.publish_start_session_notification(intent_message.site_id, "Fan Turned On", "")
@@ -60,9 +61,9 @@ class fanTurnOn(object):
     # More callback function goes here...
     def lightTurnOn_callback(self, hermes, intent_message):
         hermes.publish_end_session(intent_message.session_id, "")
-        powerstatus = intent_message.slots.power.first().value
+        
         print '[Received] intent : {}'.format(intent_message.intent.intent_name)
-        self.lightcommand(powerstatus)
+        self.lightcommand()
         hermes.publish_start_session_notification(intent_message.site_id, "Light Turned On", "")
 
     # --> Master callback function, triggered everytime an intent is recognized
