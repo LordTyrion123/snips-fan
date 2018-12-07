@@ -52,6 +52,7 @@ class fanTurnOn(object):
         
         # action code goes here...
         print '[Received] intent: {}'.format(intent_message.intent.intent_name)
+        print(
         powerstatus = intent_message.slots.power.first().value
         self.publishcommand(powerstatus)
         
@@ -74,9 +75,11 @@ class fanTurnOn(object):
             self.fanTurnOn_callback(hermes, intent_message)
         elif coming_intent == 'lordtyrion96:fanTurnOn':
             print("Testing 2")
+            print(len(intentMessage.slots.article_indicator))
+            print(intentMessage.slots.article_indicator)
             self.fanTurnOn_callback(hermes, intent_message)
 #        elif coming_intent == 'lordtyrion96:lightTurnOn':
-#            print("Testing 3")
+#            print("Testing 3")          
 #            self.lightTurnOn_callback(hermes, intent_message)
 
         # more callback and if condition goes here...
