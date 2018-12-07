@@ -52,7 +52,6 @@ class fanTurnOn(object):
         
         # action code goes here...
         print '[Received] intent: {}'.format(intent_message.intent.intent_name)
-        print(
         powerstatus = intent_message.slots.power.first().value
         self.publishcommand(powerstatus)
         
