@@ -70,7 +70,7 @@ class fanTurnOn(object):
         elif coming_intent == 'lordtyrion96:fanTurnOn':
             print("Testing 2")
             self.fanTurnOn_callback(hermes, intent_message)
-         elif coming_intent == 'lordtyrion96:lightTurnON':
+        elif coming_intent == 'lordtyrion96:lightTurnON':
             print("Testing 3")
             self.lightTurnOn_callback(hermes, intent_message)
 
