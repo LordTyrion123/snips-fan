@@ -5,7 +5,6 @@ from snipsTools import SnipsConfigParser
 from hermes_python.hermes import Hermes
 from hermes_python.ontology import *
 import io
-from pixels import pixels
 
 CONFIG_INI = "config.ini"
 
@@ -31,11 +30,15 @@ class fanTurnOn(object):
 
         # start listening to MQTT
         self.start_blocking()
-    def publishcommand(self):
+    def publishcommand(self, powerstatus):
        #ip_address=findmqttaddr()
         client = mqtt.Client()
         client.connect(MQTT_IP_ADDR,1883)     #Ip address and port
-        client.publish("inTopic","0")     #gatewayUID
+        print(powerstatus)
+        if(powerstatus.lower() == "on")
+            client.publish("inTopic","0")     #gatewayUID
+        else
+            client.publish("inTopic","1")     #gatewayUID
         
     def lightcommand(self):
         pixels.think()
@@ -57,8 +60,9 @@ class fanTurnOn(object):
     # More callback function goes here...
     def lightTurnOn_callback(self, hermes, intent_message):
         hermes.publish_end_session(intent_message.session_id, "")
+        powerstatus = intent_message.slots.power.first().value
         print '[Received] intent : {}'.format(intent_message.intent.intent_name)
-        self.lightcommand()
+        self.lightcommand(powerstatus)
         hermes.publish_start_session_notification(intent_message.site_id, "Light Turned On", "")
 
     # --> Master callback function, triggered everytime an intent is recognized
@@ -70,9 +74,9 @@ class fanTurnOn(object):
         elif coming_intent == 'lordtyrion96:fanTurnOn':
             print("Testing 2")
             self.fanTurnOn_callback(hermes, intent_message)
-        elif coming_intent == 'lordtyrion96:lightTurnON':
-            print("Testing 3")
-            self.lightTurnOn_callback(hermes, intent_message)
+#        elif coming_intent == 'lordtyrion96:lightTurnOn':
+#            print("Testing 3")
+#            self.lightTurnOn_callback(hermes, intent_message)
 
         # more callback and if condition goes here...
 
