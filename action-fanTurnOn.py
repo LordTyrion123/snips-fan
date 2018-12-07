@@ -35,9 +35,9 @@ class fanTurnOn(object):
         client = mqtt.Client()
         client.connect(MQTT_IP_ADDR,1883)     #Ip address and port
         print(powerstatus)
-        if(powerstatus.lower() == "on")
+        if powerstatus.lower() == "on":
             client.publish("inTopic","0")     #gatewayUID
-        else
+        else:
             client.publish("inTopic","1")     #gatewayUID
         
     def lightcommand(self):
