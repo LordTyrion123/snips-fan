@@ -5,3 +5,4 @@ hermes-python>=0.1
 paho-mqtt>=1.4.0
 spidev>=3.0
 gpiozero>=1.4.0
+numpy>=1.11.9
