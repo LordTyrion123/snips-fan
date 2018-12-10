@@ -52,8 +52,7 @@ class fanTurnOn(object):
         
         # action code goes here...
         print '[Received] intent: {}'.format(intent_message.intent.intent_name)
-        #powerstatus = intent_message.slots.power.first().value
-        powerstatus = "on"
+        powerstatus = intent_message.slots.on.first().value
         self.publishcommand(powerstatus)
         
         # if need to speak the execution result by tts
@@ -74,11 +73,7 @@ class fanTurnOn(object):
             print("Testing")
             self.fanTurnOn_callback(hermes, intent_message)
         elif coming_intent == 'lordtyrion96:fanTurnOn':
-            print("Testing 2")
-            print(len(intent_message.slots))
-            print(intent_message.slots[0].rawValue)
             print(intent_message.slots.on.first().value)
-            #print(intent_message.slots[1].fan.first().value)
             self.fanTurnOn_callback(hermes, intent_message)
 #        elif coming_intent == 'lordtyrion96:lightTurnOn':
 #            print("Testing 3")          
