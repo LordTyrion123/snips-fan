@@ -75,8 +75,10 @@ class fanTurnOn(object):
             self.fanTurnOn_callback(hermes, intent_message)
         elif coming_intent == 'lordtyrion96:fanTurnOn':
             print("Testing 2")
-            print(len(intent_message.slots))
-            print(intent_message.slots[0].rawValue)
+            print("len " + len(intent_message.slots))
+            print("rawvalue " + intent_message.slots[0].rawValue)
+            print("array " + intent_message.slots.fan.first().value)
+            print("[1] " + intent_message.slots[1].fan.first().value)
             self.fanTurnOn_callback(hermes, intent_message)
 #        elif coming_intent == 'lordtyrion96:lightTurnOn':
 #            print("Testing 3")          
