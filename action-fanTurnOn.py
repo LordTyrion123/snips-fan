@@ -7,7 +7,7 @@ from hermes_python.ontology import *
 import io
 import os
 import time
-#from pixels import pixels
+from pixels import pixels
 
 CONFIG_INI = "config.ini"
 
