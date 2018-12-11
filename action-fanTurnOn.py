@@ -5,7 +5,9 @@ from snipsTools import SnipsConfigParser
 from hermes_python.hermes import Hermes
 from hermes_python.ontology import *
 import io
-from pixels import pixels
+import os
+import time
+#from pixels import pixels
 
 CONFIG_INI = "config.ini"
 
@@ -42,9 +44,14 @@ class fanTurnOn(object):
             client.publish("inTopic","1")     #gatewayUID
         
     def lightcommand(self):
-        pixels.think()
+        #pixels.think()
         time.sleep(4)
-        pixels.off()
+        #pixels.off()
+     
+    def musicCommand(self):
+        time.sleep(3)
+        cmd = 'mpg321 /home/pi/Music/Daft_Punk_-_Around_The_World_mp3.shmidt.net.mp3'
+        os.system(cmd)
         
     # --> Sub callback function, one per intent
     def fanTurnOn_callback(self, hermes, intent_message):
@@ -66,6 +73,12 @@ class fanTurnOn(object):
         print '[Received] intent : {}'.format(intent_message.intent.intent_name)
         self.lightcommand()
         hermes.publish_start_session_notification(intent_message.site_id, "Light Turned On", "")
+        
+    def playMusic_callback(self, hermes, intent_message):
+        hermes.publish_end_session(intent_message.session_id,"")
+        
+        hermes.publish_start_session_notification(intent_message.site_id, "Music Played", "")
+        self.musicCommand()
 
     # --> Master callback function, triggered everytime an intent is recognized
     def master_intent_callback(self,hermes, intent_message):
@@ -76,6 +89,8 @@ class fanTurnOn(object):
         elif coming_intent == 'lordtyrion96:fanTurnOn':
             print(intent_message.slots.on.first().value)
             self.fanTurnOn_callback(hermes, intent_message)
+        elif coming_intent == 'lordtyrion96:playMusic':
+            self.playMusic_callback(hermes, intent_message)
 #        elif coming_intent == 'lordtyrion96:lightTurnOn':
 #            print("Testing 3")          
 #            self.lightTurnOn_callback(hermes, intent_message)
